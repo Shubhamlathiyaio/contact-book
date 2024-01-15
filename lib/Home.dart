@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'Data/Data of json.dart';
@@ -10,7 +11,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future get() async {}
+  final dio = Dio();
+  Future get() async {
+    var response = await dio.get('https://firstserver123.000webhostapp.com/Prodect/index.php');
+    print(response);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class _HomeState extends State<Home> {
         future: get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
+            if (true) {
               List l = [
                 {
                   "id": 1,
@@ -114,14 +119,15 @@ class _HomeState extends State<Home> {
                 }
               ];
               return ListView.builder(
+                itemCount: l.length,
                 itemBuilder: (context, index) {
                   Data d = Data.get(l[index]);
                   return Card(
                     child: ListTile(
-                      leading: Center(child: Text("${d.id}"),),
+                      // leading: Center(child: Text("${d.id}"),),
                       title: Text("${d.name}"),
                       subtitle: Text("${d.contact}"),
-                      trailing: Text("${d.city}"),
+                      // trailing: Text("${d.city}"),
                     ),
                   );
                 },

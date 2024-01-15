@@ -1,5 +1,6 @@
 class Data {
-  final id, name, contact, user, city, password, image;
+  int? id;
+  String? name, contact, user, city, password, image;
 
   Data(this.id, this.name, this.contact, this.user, this.city, this.password, this.image);
 

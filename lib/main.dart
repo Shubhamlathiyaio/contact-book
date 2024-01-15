@@ -11,6 +11,6 @@ void main()
       'login':(context) => Login(),
       'add':(context) => Add(),
       'home':(context) => Home(),
-    },initialRoute: 'home',
+    },initialRoute: 'add',
   ));
 }
