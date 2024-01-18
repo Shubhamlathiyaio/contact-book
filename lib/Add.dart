@@ -26,20 +26,7 @@ class _AddState extends State<Add> {
   Widget build(BuildContext context) {
     final dio = Dio();
 
-    var themecolore = Colors.blue;
-
     return Scaffold(
-      drawer: Drawer(
-          child: Column(
-        children: [
-          DrawerHeader(
-              child: UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: themecolore),
-                  accountName: Text('Shubham'),
-                  accountEmail: Text('94844444047')),
-              duration: Duration(seconds: 1)),
-        ],
-      )),
       appBar: AppBar(),
       resizeToAvoidBottomInset: false,
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,7 +36,7 @@ class _AddState extends State<Add> {
         con.tf(user, "Enter your user name"),
         con.tf(password, "Enter the password"),
         con.tf(city, "Enter your city"),
-        Row(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
                 height: 200,
@@ -57,7 +44,7 @@ class _AddState extends State<Add> {
                 alignment: Alignment.center,
                 child: image != null
                     ? Image(image: FileImage(File(image!.path)))
-                    : Text('data')),
+                    : Text('Upload your image',style: TextStyle(fontSize: 24),)),
             OutlinedButton(
                 onPressed: () {
                   showDialog(
@@ -90,7 +77,7 @@ class _AddState extends State<Add> {
                 child: Text('Upload image'))
           ],
         ),
-        OutlinedButton(onPressed: () async {
+        OutlinedButton(style: ButtonStyle(maximumSize: MaterialStatePropertyAll(Size(300, 100))),onPressed: () async {
 
               var img_data = base64Encode(await image!.readAsBytes());
               final data = FormData.fromMap({
@@ -101,8 +88,8 @@ class _AddState extends State<Add> {
               'city': '${city.text}',
               'image': '${img_data}',
               });
-              final response = await dio.post('https://firstserver123.000webhostapp.com/First_Flutter/add.php', data: data);
-              print(response);
+              final response = await dio.post('https://firstserver123.000webhostapp.com/Contact_book/add.php', data: data);
+              print(response.data);
 
               }, child: Text('Add'))
       ]

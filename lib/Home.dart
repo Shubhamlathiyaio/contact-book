@@ -19,7 +19,22 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    var color = Colors.blue;
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      drawer: Drawer(
+          child: Column(
+            children: [
+              DrawerHeader(
+                  child: UserAccountsDrawerHeader(
+                      decoration: BoxDecoration(color: color),
+                      accountName: Text('Shubham'),
+                      accountEmail: Text('94844444047')),
+                  duration: Duration(seconds: 1)),
+            ],
+          )),
       appBar: AppBar(),
       body: FutureBuilder(
         future: get(),

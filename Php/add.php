@@ -9,14 +9,16 @@ $city = $_REQUEST['city'];
 $image = $_REQUEST['image'];
 
 $dest = "images/" . rand(0, 10000) . ".jpg";
-$image=base64_encode($image);
+$image = base64_encode($image);
 file_put_contents($dest, $image);
 
-$qur = "INSERT INTO conbook VALUES(null,'$name','$contact','$user','$password','$city','$image')";
+$qur = "INSERT INTO conbook VALUES(null,'$name','$contact','$user','$password','$city','$dest')";
 $result = mysqli_query($conn, $qur);
-$a = array();
-while ($row = mysqli_fetch_array($result)) {
-    $a[] = $row;
-}
-echo json_encode($a);
 
+if ($result) {
+    echo "done";
+    $a = array();
+        $a['res'] = "done";
+    echo json_encode($a);
+}
+else echo "not done";

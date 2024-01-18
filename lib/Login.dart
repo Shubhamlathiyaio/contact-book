@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'Data/config.dart';
@@ -12,10 +15,12 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController user = TextEditingController();
   TextEditingController password = TextEditingController();
+  Dio dio=Dio();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Login'),
         centerTitle: true,
@@ -32,8 +37,12 @@ class _LoginState extends State<Login> {
             height: 20,
           ),
           OutlinedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'home');
+              onPressed: () async {
+                final response = await dio.post('https://firstserver123.000webhostapp.com/Contact_book/view.php');
+                // print(response);
+                List m=jsonDecode(response.data);
+                print(m);
+                // Navigator.pushNamed(context, 'home');
               },
               child: Text('Submit')),
           Row(
